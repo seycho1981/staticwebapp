@@ -1,17 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Vanilla JavaScript App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Pulse - Student Research Platform</title>
+    <style>
+        :root {
+            --primary-color: #00A86B;     /* CollegePulse green */
+            --secondary-color: #00C07B;    /* Slightly lighter green for hover */
+            --text-color: #2d3748;
+            --light-bg: #f7fafc;
+            --white: #ffffff;
+            --dark-green: #008F5D;        /* Darker green for contrast */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        /* Navigation */
+        .nav {
+            padding: 1rem 2rem;
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:not(.nav-button):hover {
+            color: var(--primary-color);
+        }
+
+        /* New styles for the top buttons */
+        .nav-button {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button.primary {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+        }
+
+        .nav-button.primary:hover {
+            background: var(--dark-green);
+        }
+
+        .nav-button.secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            margin-left: 1rem;
+        }
+
+        .nav-button.secondary:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            background: var(--light-bg);
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            background: var(--white);
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            border-radius: 8px;
+            background: var(--light-bg);
+            text-align: center;
+        }
+
+        .feature-card h3 {
+            margin: 1rem 0;
+            color: var(--primary-color);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 4rem 2rem;
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--secondary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background: var(--dark-green);  /* Changed hover color */
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem;
+            background: var(--light-bg);
+            text-align: center;
+        }
+
+        .footer p {
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .features-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <main>
-    <h1>Vanilla JavaScript App</h1>
-  </main>
-</body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">College Pulse</a>
+            <div class="nav-links">
+                <a href="#solutions">SOLUTIONS</a>
+                <a href="#research">RESEARCH</a>
+                <a href="#methodology">METHODOLOGY</a>
+                <a href="#blog">BLOG</a>
+                <a href="#signup" class="nav-button primary">STUDENT SIGN UP</a>
+                <a href="#contact" class="nav-button secondary">GET IN TOUCH</a>
+            </div>
+        </div>
+    </nav>
 
-</html>
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Empowering Academic Research</h1>
+            <p>Connect with research participants and gather valuable insights for your academic studies through our trusted survey platform.</p>
+            <a href="#" class="button">Start Your Research</a>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="features-container">
+            <div class="feature-card">
+                <h3>IRB Compliant</h3>
+                <p>All research conducted through our platform adheres to strict ethical guidelines and IRB requirements.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Targeted Audience</h3>
+                <p>Reach the right participants for your research with our sophisticated targeting capabilities.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Secure Data</h3>
+                <p>Your research data is protected with enterprise-grade security and encryption.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-container">
+            <h2>Ready to Start Your Research?</h2>
+            <p>Join thousands of researchers who trust our platform for their academic studies.</p>
+            <a href="#" class="button">Get Started Now</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 College-Pulse. All rights reserved.</p>
+        <p>Contact: research@college-pulse.com</p>
+    </footer>
+</body>
+</html> 
