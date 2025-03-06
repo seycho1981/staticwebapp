@@ -1,271 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Pulse - Student Research Platform</title>
+    <title>GlitchVerse - Unleash the Chaos!</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/3.0.0/tailwind.min.css" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #00A86B;     /* CollegePulse green */
-            --secondary-color: #00C07B;    /* Slightly lighter green for hover */
-            --text-color: #2d3748;
-            --light-bg: #f7fafc;
-            --white: #ffffff;
-            --dark-green: #008F5D;        /* Darker green for contrast */
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        }
-
         body {
-            line-height: 1.6;
-            color: var(--text-color);
+            background-color: #0f0f0f;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
         }
 
-        /* Navigation */
-        .nav {
-            padding: 1rem 2rem;
-            background: var(--white);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
+        .neon-text {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
         }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .glitch {
+            position: relative;
+            font-size: 4rem;
+            color: #fff;
+            animation: glitch 1s infinite;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            text-decoration: none;
+        @keyframes glitch {
+            0% { clip: rect(42px, 9999px, 44px, 0); }
+            5% { clip: rect(28px, 9999px, 63px, 0); }
+            10% { clip: rect(82px, 9999px, 33px, 0); }
+            15% { clip: rect(56px, 9999px, 73px, 0); }
+            20% { clip: rect(17px, 9999px, 89px, 0); }
+            25% { clip: rect(73px, 9999px, 35px, 0); }
+            30% { clip: rect(48px, 9999px, 99px, 0); }
+            35% { clip: rect(64px, 9999px, 39px, 0); }
+            40% { clip: rect(29px, 9999px, 80px, 0); }
+            45% { clip: rect(47px, 9999px, 96px, 0); }
+            50% { clip: rect(84px, 9999px, 47px, 0); }
         }
 
-        .nav-links {
-            display: flex;
-            align-items: center;
+        .glitch::before {
+            content: attr(data-text);
+            position: absolute;
+            left: 2px;
+            text-shadow: -2px 0 red;
+            clip: rect(24px, 550px, 90px, 0);
         }
 
-        .nav-links a {
-            margin-left: 2rem;
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 600;
-            font-size: 0.875rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .nav-links a:not(.nav-button):hover {
-            color: var(--primary-color);
-        }
-
-        /* New styles for the top buttons */
-        .nav-button {
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .nav-button.primary {
-            background: var(--primary-color);
-            color: var(--white);
-            border: none;
-        }
-
-        .nav-button.primary:hover {
-            background: var(--dark-green);
-        }
-
-        .nav-button.secondary {
-            background: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-            margin-left: 1rem;
-        }
-
-        .nav-button.secondary:hover {
-            background: var(--primary-color);
-            color: var(--white);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 8rem 2rem 4rem;
-            background: var(--light-bg);
-            text-align: center;
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary-color);
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-color);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 4rem 2rem;
-            background: var(--white);
-        }
-
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            padding: 2rem;
-            border-radius: 8px;
-            background: var(--light-bg);
-            text-align: center;
-        }
-
-        .feature-card h3 {
-            margin: 1rem 0;
-            color: var(--primary-color);
-        }
-
-        /* CTA Section */
-        .cta {
-            padding: 4rem 2rem;
-            background: var(--primary-color);
-            color: var(--white);
-            text-align: center;
-        }
-
-        .cta-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: var(--secondary-color);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        .button:hover {
-            background: var(--dark-green);  /* Changed hover color */
-        }
-
-        /* Footer */
-        .footer {
-            padding: 2rem;
-            background: var(--light-bg);
-            text-align: center;
-        }
-
-        .footer p {
-            color: var(--text-color);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .features-container {
-                grid-template-columns: 1fr;
-            }
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            left: -2px;
+            text-shadow: -2px 0 cyan;
+            clip: rect(85px, 550px, 140px, 0);
         }
     </style>
 </head>
+
 <body>
-    <nav class="nav">
-        <div class="nav-container">
-            <a href="#" class="logo">College Pulse</a>
-            <div class="nav-links">
-                <a href="#solutions">SOLUTIONS</a>
-                <a href="#research">RESEARCH</a>
-                <a href="#methodology">METHODOLOGY</a>
-                <a href="#blog">BLOG</a>
-                <a href="#signup" class="nav-button primary">STUDENT SIGN UP</a>
-                <a href="#contact" class="nav-button secondary">GET IN TOUCH</a>
-            </div>
-        </div>
-    </nav>
 
-    <section class="hero">
-        <div class="hero-container">
-            <h1>Empowering Academic Research</h1>
-            <p>Connect with research participants and gather valuable insights for your academic studies through our trusted survey platform.</p>
-            <a href="#" class="button">Start Your Research</a>
+    <!-- Header -->
+    <header class="text-center py-10">
+        <h1 class="glitch" data-text="GlitchVerse">GlitchVerse</h1>
+        <p class="neon-text text-xl mt-2">Unleash the Chaos!</p>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="text-center my-12 px-6">
+        <img src="https://source.unsplash.com/800x400/?retro,arcade,neon" alt="Retro Arcade"
+            class="mx-auto rounded-lg shadow-lg mb-8 hover:opacity-80 transition duration-300">
+
+        <h2 class="neon-text text-3xl font-bold mb-4">🎮 Welcome to the Glitch!</h2>
+        <p class="text-lg mb-8">Your portal to chaos, memes, and mind-bending fun!</p>
+
+        <a href="#explore" class="bg-black text-green-400 py-3 px-6 rounded-full border border-green-400 hover:bg-green-400 hover:text-black transition-transform transform hover:scale-110">Enter the Matrix</a>
+    </section>
+
+    <!-- Features Section -->
+    <section id="explore" class="py-12 px-6">
+        <div class="text-center">
+            <h3 class="neon-text text-3xl font-bold mb-6">🔥 What’s Inside 🔥</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-black">
+                <div class="bg-green-400 p-6 rounded-lg shadow-md hover:bg-green-500 transition">
+                    <h4 class="text-2xl font-bold mb-2">🤖 AI Memes</h4>
+                    <p>Memes that are 50% relatable and 50% chaotic energy.</p>
+                </div>
+                <div class="bg-green-400 p-6 rounded-lg shadow-md hover:bg-green-500 transition">
+                    <h4 class="text-2xl font-bold mb-2">👾 Retro Games</h4>
+                    <p>Old-school games with a glitchy twist.</p>
+                </div>
+                <div class="bg-green-400 p-6 rounded-lg shadow-md hover:bg-green-500 transition">
+                    <h4 class="text-2xl font-bold mb-2">🌀 Weird Facts</h4>
+                    <p>Mind-blowing facts you’ll wish you didn’t know.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="features" id="features">
-        <div class="features-container">
-            <div class="feature-card">
-                <h3>IRB Compliant</h3>
-                <p>All research conducted through our platform adheres to strict ethical guidelines and IRB requirements.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Targeted Audience</h3>
-                <p>Reach the right participants for your research with our sophisticated targeting capabilities.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Secure Data</h3>
-                <p>Your research data is protected with enterprise-grade security and encryption.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta">
-        <div class="cta-container">
-            <h2>Ready to Start Your Research?</h2>
-            <p>Join thousands of researchers who trust our platform for their academic studies.</p>
-            <a href="#" class="button">Get Started Now</a>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <p>&copy; 2025 College-Pulse. All rights reserved.</p>
-        <p>Contact: research@college-pulse.com</p>
+    <!-- Footer -->
+    <footer class="text-center py-6">
+        <p class="neon-text">&copy; 2025 GlitchVerse. All rights reserved.</p>
+        <p class="neon-text">Stay weird: 📸 Instagram | 🐦 Twitter | 👾 Discord</p>
     </footer>
+
 </body>
-</html> 
+
+</html>
